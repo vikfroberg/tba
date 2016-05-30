@@ -13,7 +13,7 @@ export default ({ component, fields }) => {
           <li>
             <a
               style={css('bg-primary', 'white', 'p1', 'g4', 'center')}
-              href={`/admin/components/${component.id}/fields/new`}
+              href={`/admin/components/${component.slug}/fields/new`}
             >
               Create field
             </a>
@@ -30,9 +30,9 @@ export default ({ component, fields }) => {
         <ul>
           { fields.map(field =>
             <li key={field.id}>
-              [<a href={`/admin/components/${component.id}/fields/${field.id}/delete`}>x</a>]
+              [<a href={`/admin/components/${component.slug}/fields/${field.slug}/delete`}>x</a>]
               <span>&nbsp;</span>
-              [<a href={`/admin/components/${component.id}/fields/${field.id}/edit`}>edit</a>]
+              [<a href={`/admin/components/${component.slug}/fields/${field.slug}/edit`}>edit</a>]
               <span>&nbsp;</span>
               {field.name} ({field.type})
             </li>

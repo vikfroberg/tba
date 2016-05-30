@@ -14,8 +14,8 @@ export default ({ components, content }) => {
             { components.map(component =>
               <li key={component.id}>
                 <a
-                  style={css('bg-primary', 'white', 'p1', 'g4', 'center')}
-                  href={`/admin/content/new/${component.id}`}
+                  className="button mb1"
+                  href={`/admin/${component.slug}/new`}
                 >
                   Create {component.name.toLowerCase()}
                 </a>
@@ -34,9 +34,12 @@ export default ({ components, content }) => {
         <ul>
           { content.map(c =>
             <li key={c.id}>
-              {c.title}
-        &nbsp;[<a href={`/admin/content/${c.id}/edit`}>edit</a>]
-              [<a href={`/admin/content/${c.id}/delete`}>delete</a>]
+              <a href={`/admin/content/${c.id}/delete`}>
+                <span className="glyph mr1">x</span>
+              </a>
+              <a href={`/admin/content/${c.id}/edit`}>
+                {c.title}
+              </a>
             </li>
           )}
         </ul>

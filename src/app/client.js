@@ -4,10 +4,10 @@ import page from 'page'
 import serialize from 'form-serialize'
 import request from 'superagent'
 import routes from './routes'
+import reducer from './reducers'
 import {
   post,
   toUri,
-  reducer,
 } from './utils'
 
 const get = page

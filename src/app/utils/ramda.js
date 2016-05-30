@@ -16,6 +16,9 @@ export const getKeys =
 export const defaults =
   R.flip(R.merge)
 
+export const override =
+  R.flip(R.merge)
+
 export const removeIndex =
   R.remove(R.__, 1)
 

@@ -1,26 +1,22 @@
 import React from 'react'
-import { css, presentConfirm } from '../../utils'
 
 export default props => {
   return (
-    <div style={css('p2')}>
-      <a style={css('underline')} href="/admin">Admin</a>
-      <h1 style={css('h1', 'mb2')}>
+    <div>
+      <a className="back" href="/admin">Admin</a>
+      <h1 className="page-title mb2">
         Components
       </h1>
-      <div style={css('mb4')}>
+      <div>
         <ul>
           <li>
-            <a
-              style={css('bg-primary', 'white', 'p1', 'g4', 'center')}
-              href={'/admin/components/new'}
-            >
+            <a className="button mb2" href={'/admin/components/new'}>
               Create component
             </a>
           </li>
         </ul>
       </div>
-      <h2 style={css('h3', 'mb2', 'grey')}>
+      <h2 className="section-title mb2">
         List
       </h2>
       { !props.components.length &&
@@ -29,16 +25,11 @@ export default props => {
       { !!props.components.length &&
         <ul>
           { props.components.map(c =>
-            <li key={c.id}>
+            <li key={c.slug}>
               {c.name}
-              <a href={`/admin/components/${c.id}/edit`}>Edit</a>
-              <a href={`/admin/components/${c.id}/fields`}>Manage fields</a>
-              <a
-                onClick={presentConfirm(`Are you sure you want to delete ${c.name}`)}
-                href={`/admin/components/${c.id}/delete`}
-              >
-                Delete
-              </a>
+              <a href={`/admin/components/${c.slug}/edit`}>Edit</a>
+              <a href={`/admin/components/${c.slug}/fields`}>Manage fields</a>
+              <a href={`/admin/components/${c.slug}/delete`}>Delete</a>
             </li>
           )}
         </ul>

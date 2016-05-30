@@ -1,24 +1,38 @@
+import 'source-map-support/register'
 import fs from 'fs'
+import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
 import routes from './routes'
+import reducer from './reducers'
 import {
   compose,
   prop,
   reduce,
   assoc,
   filter,
-  reducer,
   render,
 } from './utils'
 
-const db = JSON.parse(fs.readFileSync(__dirname + '/db.json', 'utf-8'))
+const jsonPath = './public/db.json'
+const initialData = {
+  actions: [{
+    type: '@@INIT',
+    payload: {},
+  }],
+}
+
+if (!fs.existsSync(jsonPath)) {
+  fs.writeFileSync(jsonPath, JSON.stringify(initialData))
+}
+
+let db = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'))
 let state = db.actions.reduce(reducer, undefined)
 
 const dispatch = action => {
   db.actions.push(assoc('created_at', new Date(), action))
   state = db.actions.reduce(reducer, undefined)
-  fs.writeFileSync(__dirname + '/db.json', JSON.stringify(db))
+  fs.writeFileSync(jsonPath, JSON.stringify(db))
 }
 
 const app = express()
@@ -37,10 +51,7 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.json(compose(
-    filter(c => c[req.query.field] == req.query.value),
-    prop('content'),
-  )(state))
+  res.json(state)
 })
 
 app.post('/dispatch', (req, res) => {
@@ -50,13 +61,14 @@ app.post('/dispatch', (req, res) => {
 
 app.get('/actions', (req, res) => {
   if (typeof req.query.clear !== 'undefined') {
-    db.actions = []
-    dispatch({ type: '@@INIT' })
+    db = initialData
+    fs.writeFileSync(jsonPath, JSON.stringify(db))
     res.redirect('/actions')
   }
   res.json(db)
 })
 
+// ['GET', 'admin/content', context => ...]
 routes.forEach(([method, path, handler]) => {
   const finalHandler = ({ params, query, body }, res) => {
     handler({ params, query, body, ...res.locals.context })

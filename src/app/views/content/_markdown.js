@@ -5,7 +5,7 @@ export default props => {
   return (
     <textarea
       rows="10"
-      style={css('mb2', 'b1', 'p1', 'g4')}
+      className="mb2 input"
       { ...props }
     />
   )

@@ -1,10 +1,9 @@
-import admin from './admin'
-import fields from './fields'
-import components from './components'
-import content from './content'
-import {
-  reduce,
-  concat,
-} from '../utils'
+import { controllersToRoutes } from '../utils'
 
-export default reduce(concat, [], [admin, components, content, fields])
+export default controllersToRoutes([
+  ['/admin', require('../controllers/admin').default],
+  ['/admin/:component_slug', require('../controllers/create').default],
+  ['/admin/content', require('../controllers/content').default],
+  ['/admin/components', require('../controllers/components').default],
+  ['/admin/components/:component_slug/fields', require('../controllers/fields').default],
+])

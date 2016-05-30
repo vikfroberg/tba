@@ -4,11 +4,11 @@ import { css } from '../../utils'
 export default ({ component }) => {
   return (
     <div style={css('p2')}>
-      <a href={`/admin/components/${component.id}/fields`}>Fields</a>
+      <a href={`/admin/components/${component.slug}/fields`}>Fields</a>
       <h1 style={css('h1', 'mb2')}>
         Create field
       </h1>
-      <form action={`/admin/components/${component.id}/fields/new`} method="POST">
+      <form action={`/admin/components/${component.slug}/fields/new`} method="POST">
         <input
           style={css('mb2', 'b1', 'p1', 'g4')}
           type="text"

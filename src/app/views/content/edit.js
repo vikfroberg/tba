@@ -1,8 +1,8 @@
 import React from 'react'
-import { css } from '../../utils'
+import { css, find, propEq, prop } from '../../utils'
 import Field from './_field'
 
-export default ({ content, fields }) => {
+export default ({ content, fields, field_content }) => {
   return (
     <div style={css('p2')}>
       <a style={css('underline')} href="/admin/content">Content</a>
@@ -22,9 +22,9 @@ export default ({ content, fields }) => {
             <Field
               key={field.id}
               type={field.type}
-              name={field.slug}
+              name={field.id}
               placeholder={field.name}
-              defaultValue={content.data[field.slug]}
+              defaultValue={prop('value', find(propEq('field_id', field.id), field_content))}
             />
           )
         }

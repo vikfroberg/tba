@@ -7,30 +7,10 @@ export default (component, state) => `
   <head>
     <meta charset="UTF-8">
     <title>TBA</title>
-    <style type="text/css">
-      *:not(style):not(title) {
-        margin: 0;
-        padding: 0;
-        background: none;
-        color: inherit;
-        line-height: 1.5;
-        font-family: sans-serif;
-        text-align: left;
-        font-weight: normal;
-        font-size: 16px;
-        list-style: none;
-        border: none;
-        border-radius: 0;
-        text-decoration: none;
-        box-sizing: border-box;
-        -webkit-appearance: none;
-      }
-      input {
-        display: block;
-      }
-    </style>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
+  <body class="p2">
     <div id="component">${renderToString(component)}</div>
     <script>
       window.app = {

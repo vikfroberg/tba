@@ -16,6 +16,7 @@ let handlers = {}
 let middlewares = []
 
 export default (action, body) => {
+  console.log(body)
   if (action === '*') {
     middlewares.push(body)
   }
